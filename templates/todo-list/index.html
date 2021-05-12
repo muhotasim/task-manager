@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self';style-src 'self';script-src-elem 'self'; object-src 'self';">
+    <title>Todo List</title>
+    <link rel="stylesheet" href="../../content/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../content/css/project.css">
+
+
+    
+</head>
+<body>
+    <div class="app">
+        <div class="container mt-1">
+            <h1>Task Board</h1>
+            <div class="task-type-holder">
+                <div class="todo-list">
+                    <div class="task-list-title">
+                        <h2>TODO List</h2>
+                    </div>
+                    <div class="input-holder">
+                        <div class="text-input">
+                            <textarea></textarea>
+                        </div>
+                        <button>add</button>
+                    </div>
+                    <div class="task-list-todos droparea" dropzone="true" type="todos"></div>
+
+                </div>
+                <div class="inprocess-list">
+                    <div class="task-list-title">
+                        <h2>In Process List</h2>
+                    </div>
+                    <div dropzone="true" type="process" class="task-list-inprocess droparea"></div>
+                </div>
+                <div class="qa-list">
+                    <div class="task-list-title">
+                        <h2>QA List</h2>
+                    </div>
+                    <div dropzone="true" type="qa" class="task-list-qa droparea"></div>
+                </div>
+                <div class="done-list">
+                    <div class="task-list-title">
+                        <h2>Done List</h2>
+                    </div>
+                    <div dropzone="true" type="done" class="task-list-done droparea"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="../../content/js/taskboard.js"></script>
+
+    
+</body>
+</html>

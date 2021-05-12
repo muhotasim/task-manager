@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self';style-src 'self';script-src 'unsafe-inline'">
+    <title>New Project</title>
+    <link rel="stylesheet" href="../../content/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../content/css/project.css">
+</head>
+<body>
+    <div class="app">
+      <div class="container">
+          <h1> Create Project</h1>
+            <form action="#" >
+                <div>
+                    <div class="form-group">
+                        <label class="control-label">Project Name</label>
+                        <input class="form-control" value="" name="project_name" id="project_name">
+                    </div>
+                </div>
+                <button class="btn btn-md btn-primary mt-1">Submit</button>
+            </form>       
+      </div>
+    </div>
+
+
+    <script>
+        const {ipcRenderer,ipcMain} = require('electron');
+        document.querySelector("form").addEventListener("submit",(e)=>{
+            e.preventDefault();
+            let $pName = document.querySelector("#project_name");
+            let pName = $pName.value;
+            
+            ipcRenderer.send("save-project",{
+                pName:pName
+            })
+
+            // window.close();
+        })
+
+        ipcRenderer.on("save",(e,data)=>{
+            if(data.success){
+                alert("successfully saved");
+                ipcRenderer.send("relode-table",{});
+                window.close();
+            }else{
+                
+                alert("failed to saved");
+            }
+        })
+        // const {ipcRenderer} = require('electron');
+        // function openTaskBoard(e){
+        //     console.log(e);
+        //     ipcRenderer.send("open-task-manager",{})
+        // }
+    </script>
+    
+</body>
+</html>

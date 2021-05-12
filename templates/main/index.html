@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self';style-src 'self';script-src 'unsafe-inline'">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="../../content/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../content/css/project.css">
+</head>
+<body>
+    <div class="app">
+      <div class="container">
+          <h1>Project Lists</h1>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Project Name</th>
+                <!-- <th scope="col">Total Tasks</th>
+                <th scope="col">Remaining</th>
+                <th scope="col">Complated</th> -->
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- <tr>
+                <th scope="row">Task Manager</th>
+                <td>20</td>
+                <td>10</td>
+                <td>5</td>
+                <td><button class="btn btn-primary btn-sm" onclick="openTaskBoard(event)">Task board</button></td>
+              </tr> -->
+             
+            
+            </tbody>
+          </table>
+      </div>
+    </div>
+
+
+    <script>
+        const {ipcRenderer} = require('electron');
+        const Datastore = require('nedb');
+
+        function reloadTable (){
+
+          const ProjectStore = new Datastore(__dirname+"/../../src/db/_db/projects.db");
+          ProjectStore.loadDatabase(err=>{
+            console.log(err)
+            
+          document.querySelector("tbody").innerHTML = "";
+          ProjectStore.find({}, function (err, docs) {
+          if(docs){
+            docs.forEach(doc => {
+              let tr= document.createElement("tr");
+
+              // <td>${doc.total}</td>
+              //   <td>${doc.remaining}</td>
+              //   <td>${doc.done}</td>
+              tr.innerHTML = `
+              <th scope="row">${doc.name}</th>
+               
+                <td><button class="btn btn-primary btn-sm" onclick='openTaskBoard(event)' data-id="${doc._id}">Task board</button></td>
+              `
+              document.querySelector("tbody").append(tr);
+            });
+          }
+        });
+          })
+        
+        }
+        function openTaskBoard(e){
+          
+            ipcRenderer.send("open-task-manager",{
+              _id: e.target.dataset.id
+            })
+        }
+
+        ipcRenderer.on("reload",()=>{
+          reloadTable();
+        })
+        reloadTable();
+    </script>
+    
+</body>
+</html>

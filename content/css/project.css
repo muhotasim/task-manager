@@ -1,0 +1,63 @@
+html,body{
+    height: 100%;
+    width: 100%;
+}
+.app{
+    margin: 20px 0px;
+    padding-bottom: 20px;
+}
+.task-type-holder{
+    display: flex;
+}
+.todo-list,.inprocess-list,.qa-list,.done-list{
+    flex: 1;
+    border: 1px solid lightgray;
+    min-height: 80vh;
+    margin: 5px;
+    position: relative;
+    padding-top: 45px;
+}
+.task-list-todos, .task-list-inprocess, .task-list-qa, .task-list-done {
+    min-height: 400px;
+    /* background: red; */
+}
+.task-list-title{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    border-bottom: 1px solid lightgray;
+}
+.task-list-title h2 {
+    font-size: 18px;
+    text-align: center;
+    padding: 8px 0 0 0px;
+}
+.input-holder {
+    margin: 5px;
+    display: none;
+    opacity: 0;
+}
+.todo-list:hover .input-holder{
+    opacity: 1;
+    display: block;
+    transition-duration: .4s;
+}
+.input-holder .text-input textarea {
+    width: 100%;
+    border: 1px solid lightgray;
+}
+.input-holder button {
+    border: 1px solid lightgray;
+    width: 100%;
+    background: #d3d3d31f;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.task-type-holder .task-card {
+    margin: 5px;
+    padding: 5px 10px;
+    border: 1px solid lightgray;
+}
